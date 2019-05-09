@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import Model.Cidade;
 import java.util.List;
 
 /**
@@ -14,8 +15,10 @@ import java.util.List;
 public interface GenericoDAO<T> {
    
     public List<T> select();
+    public Cidade select(int id);
+    public Cidade select(String nome);
     public boolean insert(T t);
-    public boolean delete(T t);
+    public boolean delete(int id);
     public boolean update(T t);
     
     

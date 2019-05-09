@@ -93,7 +93,7 @@ public class CidadeDAO implements GenericoDAO<Cidade> {
     }
 
     @Override
-    public boolean delete(Cidade cidade) {
+    public boolean delete(int id) {
     boolean resposta = false;
         Connection conn = Conexao.getConn();
         
@@ -103,7 +103,7 @@ public class CidadeDAO implements GenericoDAO<Cidade> {
         String sql = "delete from cidade where id=?";
         PreparedStatement stm = conn.prepareStatement(sql);
         
-        stm.setInt(1, cidade.getId() );
+        stm.setInt(1, id );
         
        int resultado = stm.executeUpdate();
         
@@ -142,6 +142,108 @@ public class CidadeDAO implements GenericoDAO<Cidade> {
             Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
             return resposta;
+
+
+    }
+
+    @Override
+    public Cidade select(int id) {
+
+    List<Cidade> cidades = new ArrayList();
+        
+        try {
+            
+            Connection conn = Conexao.getConn();
+            
+            String sql = "SELECT * FROM Cidade WHERE ID = ?";
+            
+            PreparedStatement stm = conn.prepareStatement(sql);
+            
+            stm.setInt(1, id);
+            
+            ResultSet rs = stm.executeQuery();
+            
+            rs.next();
+                
+                Cidade cidade= new Cidade();
+                cidade.setId(rs.getInt("id"));
+                cidade.setNome(rs.getString("nome"));
+                cidade.setEstado(rs.getString("estado"));
+                cidade.setPais(rs.getString("pais"));
+                cidade.setPopulacao(rs.getInt("populacao"));
+                
+                
+                        
+                       
+                
+          
+                
+            
+            rs.close();
+            stm.close();
+            conn.close();
+            
+             return cidade;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       
+        return null;
+
+
+
+    }
+
+    @Override
+    public Cidade select(String nome) {
+
+List<Cidade> cidades = new ArrayList();
+        
+        try {
+            
+            Connection conn = Conexao.getConn();
+            
+            String sql = "SELECT * FROM Cidade WHERE nome = ?";
+            
+            PreparedStatement stm = conn.prepareStatement(sql);
+            
+            stm.setString(1, nome);
+            
+            ResultSet rs = stm.executeQuery();
+            
+            rs.next();
+                
+                Cidade cidade= new Cidade();
+                cidade.setId(rs.getInt("id"));
+                cidade.setNome(rs.getString("nome"));
+                cidade.setEstado(rs.getString("estado"));
+                cidade.setPais(rs.getString("pais"));
+                cidade.setPopulacao(rs.getInt("populacao"));
+                
+                
+                        
+                       
+                
+          
+                
+            
+            rs.close();
+            stm.close();
+            conn.close();
+            
+             return cidade;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       
+        return null;
+
+
+
 
 
     }
