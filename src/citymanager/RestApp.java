@@ -26,7 +26,7 @@ public class RestApp extends Application<Configuration> {
     
       @Override
     public void initialize(final Bootstrap<Configuration> bootstrap) {
-        bootstrap.addBundle(new AssetsBundle("/../html", "/..", "index.html"));
+        bootstrap.addBundle(new AssetsBundle("/html", "/", "index.html"));
     }
     
     @Override

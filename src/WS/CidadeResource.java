@@ -53,15 +53,15 @@ public class CidadeResource {
         return dao.select(idProfessor);
     }
     
- /*    @GET
-    @Path("{id/nome}")
+    @GET
+    @Path("findbyname/{nome}")
     public Cidade readTwo(@PathParam("nome") String nome) {
         String NomeProfessor = nome;
         // Precisa implementar no DAO
         return dao.select(nome);
     }
     
-  */ 
+  
     
     
     @PUT

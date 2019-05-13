@@ -123,12 +123,14 @@ public class CidadeDAO implements GenericoDAO<Cidade> {
   boolean resposta = false;
         try {
             Connection conn =  Conexao.getConn();
-            String sql = "UPDATE cidade SET nome = ?, estado = ?, pais = ?, populacao = ?";
+            String sql = "UPDATE cidade SET nome = ?, estado = ?, pais = ?, populacao = ? where id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
+           
             ps.setString(1, cidade.getNome());
             ps.setString(2, cidade.getEstado());
             ps.setString(3, cidade.getPais());
             ps.setInt(4, cidade.getPopulacao());
+            ps.setInt(5, cidade.getId());
            
             
             int resp = ps.executeUpdate();

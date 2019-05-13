@@ -5,46 +5,69 @@
     <head>
         <title>Professores (create)</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="/site/sakura.css">
+        <link rel="stylesheet" href="sakura.css">
     </head>
 
     <body>
-        <p><a href="/site">&lt; Voltar para página inicial</a></p>
-        <h1>Novo professor</h1>
+        <p><a href="index.html">&lt; Voltar para página inicial</a></p>
+        <h1>Nova cidade</h1>
 
-        <table>    
+        <table> 
+            <tr>
+                <td>ID:</td>
+                <td><input type="text" id="txtId"></td>
+            </tr>
             <tr>
                 <td>Nome:</td>
                 <td><input type="text" id="txtNome"></td>
             </tr>
             <tr>
-                <td>Matrícula:</td>
-                <td><input type="text" id="txtMatricula"></td> 
+                <td>Estado:</td>
+                <td><input type="text" id="txtEstado"></td> 
             </tr>
-            <tr><td></td><td><input type="button" onclick="criarProfessor()" value="Criar"></td></tr>
+            
+             <tr>
+                <td>País:</td>
+                <td><input type="text" id="txtPais"></td> 
+            </tr>
+             <tr>
+                <td>População:</td>
+                <td><input type="text" id="txtPopulacao"></td> 
+            </tr>
+            <tr><td></td><td><input type="button" onclick="criarCidade()" value="Criar"></td></tr>
         </table>
         <p style="font-weight:bold" id="mensagem"></p>
         
     <script>
+        const textoId = document.querySelector('#txtId');
         const textoNome = document.querySelector('#txtNome');
-        const textoMatricula = document.querySelector('#txtMatricula');
+        const textoEstado = document.querySelector('#txtEstado');
+        const textoPais = document.querySelector('#txtPais');
+        const textoPopulacao = document.querySelector('#txtPopulacao');
         const paragrafoMensagem = document.querySelector('#mensagem');
         
-        function mostrarMensagem(professorCadastrado) {
+        function mostrarMensagem(cidadeCadastrada) {
+            textoId.value = '';
             textoNome.value = '';
-            textoMatricula.value = '';
-            paragrafoMensagem.innerHTML = 'Professor criado com id ' + professorCadastrado.id;
+            textoEstado.value = '';
+            textoPais.value = '';
+            textoPopulacao.value = '';
+            
+            paragrafoMensagem.innerHTML = 'Cidade criada com id ' + cidadeCadastrada.id;
         }
 
-        async function criarProfessor() {
-            const URL = `/api/professores`;
-            const dadosProfessor = {
-                                       'nome': textoNome.value,
-                                       'matricula': textoMatricula.value
+        async function criarCidade() {
+            const URL = `/api/cidades`;
+            const dadosCidade = {      
+                                        'id':textoId.value,
+                                        'nome': textoNome.value,
+                                        'estado': textoEstado.value,
+                                         'pais': textoPais.value,
+                                         'populacao': textoPopulacao.value
                                    };
             const postRequest =    {
                                         method:'POST',
-                                        body: JSON.stringify(dadosProfessor),
+                                        body: JSON.stringify(dadosCidade),
                                         headers: { 'Content-type': 'application/json;charset=UTF-8' }
                                    };
             try {
